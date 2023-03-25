@@ -1,0 +1,45 @@
+{
+    "name": "@zera-ts/wordlists",
+    "version": "0.0.1",
+    "description": "A tree-shakable, BIP39 compliant wordlist library for Zera, providing support for multiple languages in a lightweight package.",
+    "license": "Apache-2.0",
+    "main": "./dist/index.js",
+    "module": "./dist/index.mjs",
+    "types": "./dist/index.d.ts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "publishConfig": {
+        "main": "./dist/index.js",
+        "module": "./dist/index.mjs",
+        "types": "./dist/index.d.ts",
+        "exports": {
+            ".": {
+                "import": "./dist/index.mjs",
+                "require": "./dist/index.js",
+                "types": "./dist/index.d.ts"
+            }
+        }
+    },
+    "files": [
+        "dist",
+        "src"
+    ],
+    "devDependencies": {
+        "tsup": "6.7.0",
+        "vite": "4.2.1"
+    },
+    "scripts": {
+        "build": "tsup --dts",
+        "test": "vitest run --config ./vitest.config.ts",
+        "watch": "tsup --watch --dts"
+    },
+    "typedoc": {
+        "entryPoint": "./src/index.ts"
+    }
+}

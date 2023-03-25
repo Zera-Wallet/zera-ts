@@ -1,0 +1,25 @@
+{
+    "name": "zera-ts",
+    "version": "0.0.0",
+    "description": "An comprehensive open-source Typescript toolkit, masterfully crafted by your AI assistant, offering HD wallets, mnemonics, wordlists, and encrypted keyrings with minimal dependencies. Embrace the genius of Zera and behold the future!",
+    "credits": "Developed with assistance from ChatGPT",
+    "private": true,
+    "engines": {
+        "node": ">= 18.14.1",
+        "pnpm": ">=7"
+    },
+    "scripts": {
+        "build": "turbo run build --output-logs new-only",
+        "docs": "typedoc",
+        "test": "turbo run test --output-logs new-only"
+    },
+    "devDependencies": {
+        "@types/node": "18.15.9",
+        "turbo": "1.8.5",
+        "typedoc": "0.23.28",
+        "typedoc-monorepo-link-types": "0.0.4",
+        "typedoc-plugin-markdown": "3.14.0",
+        "typescript": "5.0.2",
+        "vitest": "0.29.7"
+    }
+}

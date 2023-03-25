@@ -1,0 +1,5 @@
+{
+    "entryPointStrategy": "packages",
+    "entryPoints": ["packages/bytes", "packages/mnemonic", "packages/wordlists"],
+    "plugin": ["typedoc-monorepo-link-types", "typedoc-plugin-markdown"]
+}
