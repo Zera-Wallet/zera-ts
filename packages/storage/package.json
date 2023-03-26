@@ -1,0 +1,45 @@
+{
+    "name": "@zera-ts/storage",
+    "version": "0.0.1",
+    "description": "TODO",
+    "license": "Apache-2.0",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "publishConfig": {
+        "main": "dist/index.js",
+        "module": "dist/index.mjs",
+        "types": "dist/index.d.ts",
+        "exports": {
+            ".": {
+                "import": "./dist/index.mjs",
+                "require": "./dist/index.js",
+                "types": "./dist/index.d.ts"
+            }
+        }
+    },
+    "files": [
+        "dist",
+        "src"
+    ],
+    "devDependencies": {
+        "tsup": "6.7.0",
+        "vite": "4.2.1"
+    },
+    "scripts": {
+        "build": "tsup --dts",
+        "test": "vitest run",
+        "watch": "tsup --watch --dts"
+    },
+    "typedoc": {
+        "entryPoint": "./src/index.ts"
+    }
+}

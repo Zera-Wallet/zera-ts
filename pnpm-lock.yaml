@@ -31,6 +31,17 @@ importers:
     devDependencies:
       tsup: 6.7.0
 
+  packages/keyring:
+    specifiers:
+      '@noble/hashes': 1.3.0
+      '@zera-ts/bytes': workspace:^0.0.1
+      tsup: 6.7.0
+    dependencies:
+      '@noble/hashes': 1.3.0
+      '@zera-ts/bytes': link:../bytes
+    devDependencies:
+      tsup: 6.7.0
+
   packages/mnemonic:
     specifiers:
       '@noble/hashes': 1.3.0
@@ -43,6 +54,14 @@ importers:
       '@zera-ts/wordlists': link:../wordlists
     devDependencies:
       tsup: 6.7.0
+
+  packages/storage:
+    specifiers:
+      tsup: 6.7.0
+      vite: 4.2.1
+    devDependencies:
+      tsup: 6.7.0
+      vite: 4.2.1
 
   packages/wordlists:
     specifiers:
