@@ -1,7 +1,6 @@
 import { argon2id } from "@noble/hashes/argon2";
-import { AES } from "@noble/hashes/aes";
 import { randomBytes } from "@zera-ts/bytes";
-
+import ZeraWordlist from "@zera-ts/wordlists";
 /**
  * A class representing an encrypted keyring for securely storing and managing cryptographic keys.
  */
@@ -31,20 +30,23 @@ export class ZeraKeyring {
 
         // Derive the encryption key using Argon2
         const salt = this.encryptedSeed.slice(0, 16);
-        const encryptionKey = await argon2id(passphrase, salt, {
-            timeCost: 2,
-            memoryCost: 65536,
-            parallelism: 1,
-            hashLength: 32,
+        const encryptionKey = argon2id(passphrase, salt, {
+            t: 2,
+            m: 65536,
+            p: 1,
+            dkLen: 32,
         });
 
         // Decrypt the encrypted seed using AES-GCM encryption
         const iv = this.encryptedSeed.slice(16, 28);
         const encryptedSeed = this.encryptedSeed.slice(28);
-        const aes = new AES(encryptionKey);
-        const seed = aes.decryptGCM(encryptedSeed, iv);
 
-        return seed;
+        // BROKEN
+        // const aes = new AES(encryptionKey);
+        // const seed = aes.decryptGCM(encryptedSeed, iv);
+
+        // return "seed";
+        throw new Error("Not implemented");
     }
 
     /**
@@ -62,28 +64,30 @@ export class ZeraKeyring {
         // Derive the encryption key using Argon2
         const salt = randomBytes(16);
         const encryptionKey = argon2id(passphrase, salt, {
-            hashLen: 32,
-            time: 2,
-            mem: 65536,
-            parallelism: 1,
-            type: argon2id.ArgonType.Argon2id,
+            dkLen: 32,
+            t: 2,
+            m: 65536,
+            p: 1,
         });
         this.encryptionKey = encryptionKey;
 
         // Generate a 12-byte initialization vector for the encryption algorithm
         const iv = randomBytes(12);
 
+        // BROKEN
         // Create a new AES encryption object with the key
-        const aes = new AES(encryptionKey);
+        // const aes = new AES(encryptionKey);
 
-        // Encrypt the seed using AES-GCM encryption
-        const encryptedSeed = aes.encryptGCM(seed, iv);
+        // // Encrypt the seed using AES-GCM encryption
+        // const encryptedSeed = aes.encryptGCM(seed, iv);
+
+        throw new Error("Not implemented");
 
         // Combine the initialization vector, salt, and encrypted seed into a single buffer
-        const output = new Uint8Array(iv.byteLength + salt.byteLength + encryptedSeed.byteLength);
-        output.set(iv);
-        output.set(salt, iv.byteLength);
-        output.set(encryptedSeed, iv.byteLength + salt.byteLength);
-        this.encryptedSeed = output;
+        // const output = new Uint8Array(iv.byteLength + salt.byteLength + encryptedSeed.byteLength);
+        // output.set(iv);
+        // output.set(salt, iv.byteLength);
+        // output.set(encryptedSeed, iv.byteLength + salt.byteLength);
+        // this.encryptedSeed = output;
     }
 }

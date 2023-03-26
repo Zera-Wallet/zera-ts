@@ -1,4 +1,10 @@
-import { ZeraStorage, ZeraStorageType, ZeraStorageTypeWithAuto } from "./ZeraStorage";
+import {
+    ZeraStorage,
+    ZeraStorageType,
+    ZeraStorageTypeWithAuto,
+    isValidZeraStorageType,
+    isValidZeraStorageTypeWithAuto,
+} from "./ZeraStorage";
 import { ZeraStorageFactory, ZeraStorageModuleLoader } from "./ZeraStorageFactory";
 import { ZeraStorageDetector } from "./ZeraStorageDetector";
 
@@ -9,4 +15,6 @@ export {
     ZeraStorageModuleLoader,
     ZeraStorageTypeWithAuto,
     ZeraStorageDetector,
+    isValidZeraStorageType,
+    isValidZeraStorageTypeWithAuto,
 };

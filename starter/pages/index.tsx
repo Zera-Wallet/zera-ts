@@ -1,7 +1,10 @@
 import { useEffect } from "react";
 import ZeraWordlist from "@zera-ts/wordlists";
 import ZeraMnemonic from "@zera-ts/mnemonic";
-import { ZeraStorageFactory } from "@zera-ts/storage";
+import { ZeraStorageFactory, ZeraStorage } from "@zera-ts/storage";
+import ZeraLogger from "@zera-ts/logger";
+
+const zlogger = new ZeraLogger("debug");
 
 export async function getServerSideProps() {
     const wordlist = await ZeraWordlist.get("en");
@@ -26,17 +29,33 @@ export async function getServerSideProps() {
     console.log("Mnemonic from store in getServerSideProps", mnemonicFromStore);
 
     await store.clear();
-    console.log("Cleared store in getServerSideProps");
+    console.log("Store cleared in getServerSideProps");
+
+    zlogger.error("Error in getServerSideProps");
+    zlogger.warn("Warn in getServerSideProps");
+    zlogger.info("Info in getServerSideProps");
+    zlogger.debug("Debug in getServerSideProps", {
+        test: "test",
+    });
+
+    const perf = await zlogger.performance(
+        async () => {
+            for (let i = 0; i < 10; i++) {
+                const mnemonic = await ZeraMnemonic.generate();
+
+                const seed = await mnemonic.toSeed();
+            }
+        },
+        {
+            label: "10 mnemonics",
+        }
+    );
 
     return {
-        props: {
-            wordlist: JSON.parse(JSON.stringify(wordlist)),
-        },
+        props: {},
     };
 }
-export default function Home({ wordlist }: { wordlist: string[] }) {
-    // console.log("Wordlist from getServerSideProps", wordlist);
-
+export default function Home() {
     async function init() {
         const mnemonic = await ZeraMnemonic.generate();
         console.log("Mnemonic in browser", mnemonic);
@@ -46,8 +65,33 @@ export default function Home({ wordlist }: { wordlist: string[] }) {
 
         await store.setItem("mnemonic", mnemonic.toString());
 
-        const mnemonicFromStore = await store.getItem("mnemonic");
-        console.log("Mnemonic from store in browser", mnemonicFromStore);
+        const perf = await zlogger.performance(
+            async () => {
+                for (let i = 0; i < 10; i++) {
+                    const mnemonic = await generateAndSaveMnemonic(store, `mnemonic-${i}`);
+
+                    const isValid = await mnemonic.isValid();
+                    console.log("isValid in browser", isValid);
+
+                    const seed = await mnemonic.toSeed();
+                }
+            },
+            {
+                label: "10 mnemonics",
+            }
+        );
+
+        console.log("Performance in browser", perf);
+
+        zlogger.error("Error in browser");
+        zlogger.warn("Warn in browser");
+        zlogger.info("Info in browser");
+        zlogger.debug("Debug in browser", {
+            test: "test",
+        });
+
+        await store.clear();
+        console.log("Store cleared in browser");
     }
 
     useEffect(() => {
@@ -59,4 +103,10 @@ export default function Home({ wordlist }: { wordlist: string[] }) {
     }, []);
 
     return <div className="flex">Zera-test</div>;
+}
+
+async function generateAndSaveMnemonic(store: ZeraStorage, key: string) {
+    const mnemonic = await ZeraMnemonic.generate();
+    await store.setItem(key, mnemonic.toString());
+    return mnemonic;
 }

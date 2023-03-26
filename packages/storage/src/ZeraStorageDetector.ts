@@ -11,11 +11,15 @@ async function assertLocalStorage(): Promise<boolean> {
     return true;
 }
 
+let fsPromises: typeof import("fs").promises;
+if (typeof process !== "undefined" && process?.versions?.node) {
+    fsPromises = require("fs").promises;
+}
+
 async function assertFS(): Promise<boolean> {
-    if (typeof process === "undefined" || !process?.versions?.node) {
+    if (!fsPromises) {
         throw new Error("File system is not supported in this environment");
     }
-    const { promises: fsPromises } = await import("fs");
     const testFile = "__zera_storage_test__.txt";
     await fsPromises.writeFile(testFile, "1");
     await fsPromises.unlink(testFile);

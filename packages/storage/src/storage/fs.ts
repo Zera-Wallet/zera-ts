@@ -1,8 +1,8 @@
 import { ZeraStorage } from "../ZeraStorage";
-import { promises as fsPromises, existsSync, mkdirSync } from "fs";
+import { promises as fsPromises, existsSync, mkdirSync, rmdirSync } from "fs";
 import { join } from "path";
 
-class FSStorage extends ZeraStorage {
+export class FSStorage extends ZeraStorage {
     private storagePath: string;
 
     constructor(storagePath = ".zera-storage") {
@@ -46,6 +46,7 @@ class FSStorage extends ZeraStorage {
         const files = await fsPromises.readdir(this.storagePath);
         const unlinkPromises = files.map((file) => fsPromises.unlink(this.getFilePath(file)));
         await Promise.all(unlinkPromises);
+        rmdirSync(this.storagePath);
     }
 }
 
