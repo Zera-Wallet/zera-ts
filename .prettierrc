@@ -3,5 +3,15 @@
     "trailingComma": "es5",
     "tabWidth": 4,
     "semi": true,
-    "singleQuote": false
+    "singleQuote": false,
+    "overrides": [
+        {
+            "files": "*.yml",
+            "options": {
+                "parser": "yaml",
+                "proseWrap": "always",
+                "bracketSpacing": true
+            }
+        }
+    ]
 }

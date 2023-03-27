@@ -7,7 +7,7 @@ export const ZeraLogLevel = {
     ERROR: "error",
     NONE: "none",
 } as const;
-export type ZeraLogLevel = typeof ZeraLogLevel[keyof typeof ZeraLogLevel];
+export type ZeraLogLevel = (typeof ZeraLogLevel)[keyof typeof ZeraLogLevel];
 
 export const ZeraTimeUnit = {
     ns: 1,
@@ -16,7 +16,7 @@ export const ZeraTimeUnit = {
     s: 1e9,
     m: 1e9 * 60,
 } as const;
-export type ZeraTimeUnit = keyof typeof ZeraTimeUnit | typeof ZeraTimeUnit[keyof typeof ZeraTimeUnit];
+export type ZeraTimeUnit = keyof typeof ZeraTimeUnit | (typeof ZeraTimeUnit)[keyof typeof ZeraTimeUnit];
 
 const levelColors = {
     [ZeraLogLevel.DEBUG]: chalk.blueBright,

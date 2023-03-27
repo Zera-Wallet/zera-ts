@@ -8,6 +8,12 @@
         "test": {
             "dependsOn": ["build"],
             "inputs": ["src/**/*.{ts,tsx}", "__tests__/**/*.{ts,tsx}"]
+        },
+        "prettier:check": {
+            "inputs": ["**/*.{ts,tsx,js,jsx,json,md,css,yml,yaml}"]
+        },
+        "prettier:fix": {
+            "inputs": ["**/*.{ts,tsx,js,jsx,json,md,css,yml,yaml}"]
         }
     }
 }

@@ -5,16 +5,19 @@
     "credits": "Developed with assistance from ChatGPT",
     "private": true,
     "engines": {
-        "node": ">= 18.14.1",
+        "node": "^18.15.0",
         "pnpm": ">=7"
     },
     "scripts": {
         "build": "turbo run build --output-logs new-only",
         "docs": "typedoc",
-        "test": "turbo run test --output-logs new-only"
+        "test": "turbo run test --output-logs new-only",
+        "prettier:check": "turbo run prettier:check --output-logs new-only",
+        "prettier:fix": "turbo run prettier:fix --output-logs new-only"
     },
     "devDependencies": {
-        "@types/node": "18.15.9",
+        "@types/node": "^18.15.0",
+        "prettier": "^2.8.7",
         "turbo": "1.8.5",
         "typedoc": "0.23.28",
         "typedoc-just-the-docs-theme": "^0.0.1",

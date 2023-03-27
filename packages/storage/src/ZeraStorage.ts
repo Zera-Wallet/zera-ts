@@ -3,13 +3,13 @@ export const ZeraStorageType = {
     FILE_SYSTEM: "fs",
     MEMORY: "memory",
 } as const;
-export type ZeraStorageType = typeof ZeraStorageType[keyof typeof ZeraStorageType];
+export type ZeraStorageType = (typeof ZeraStorageType)[keyof typeof ZeraStorageType];
 
 export const ZeraStorageTypeWithAuto = {
     AUTO: "auto",
     ...ZeraStorageType,
 } as const;
-export type ZeraStorageTypeWithAuto = typeof ZeraStorageTypeWithAuto[keyof typeof ZeraStorageTypeWithAuto];
+export type ZeraStorageTypeWithAuto = (typeof ZeraStorageTypeWithAuto)[keyof typeof ZeraStorageTypeWithAuto];
 
 export function isValidZeraStorageType(type: unknown): type is ZeraStorageType {
     return typeof type === "string" && Object.values(ZeraStorageType).includes(type as ZeraStorageType);

@@ -6,7 +6,7 @@ export const ZeraValidLanguages = ["en", "es"] as const;
 /**
  * A type alias for the supported languages of Zera wordlists.
  */
-export type ZeraLanguage = typeof ZeraValidLanguages[number];
+export type ZeraLanguage = (typeof ZeraValidLanguages)[number];
 
 /**
  * Class representing a wordlist for a specific language.

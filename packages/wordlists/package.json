@@ -36,7 +36,9 @@
     },
     "scripts": {
         "build": "tsup --dts",
-        "test": "vitest run --config ./vitest.config.ts",
+        "prettier:check": "prettier --check {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
+        "prettier:fix": "prettier --write {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
+        "test": "vitest run",
         "watch": "tsup --watch --dts"
     },
     "typedoc": {
