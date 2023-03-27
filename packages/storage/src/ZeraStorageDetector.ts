@@ -13,6 +13,7 @@ async function assertLocalStorage(): Promise<boolean> {
 
 let fsPromises: typeof import("fs").promises;
 if (typeof process !== "undefined" && process?.versions?.node) {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     fsPromises = require("fs").promises;
 }
 

@@ -1,33 +1,32 @@
 name: CI
-
-on: push
-
+on:
+  push:
 env:
-    NODE_VERSION: 18.15.0
-    PNPM_VERSION: 7.27.1
-
+  NODE_VERSION: 18.15.0
+  PNPM_VERSION: 7.27.1
 jobs:
-    lint-and-format:
-        name: Lint and Format
-        runs-on: ubuntu-20.04
-        steps:
-            - uses: actions/checkout@v2
-            - uses: ./.github/actions/setup-environment
-              with:
-                  node-version: ${{ env.NODE_VERSION }}
-                  pnpm-version: ${{ env.PNPM_VERSION }}
-            - name: Check Prettier formatting
-              run: pnpm run prettier:check
-
-    build-and-test:
-        name: Build and Test
-        runs-on: ubuntu-20.04
-        steps:
-            - uses: actions/checkout@v2
-            - uses: ./.github/actions/setup-environment
-              with:
-                  node-version: ${{ env.NODE_VERSION }}
-                  pnpm-version: ${{ env.PNPM_VERSION }}
-            - run: pnpm run build
-            - run: pnpm run test
-        timeout-minutes: 15
+  lint-and-format:
+    name: Lint and Format
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup-environment
+        with:
+          node-version: '${{ env.NODE_VERSION }}'
+          pnpm-version: '${{ env.PNPM_VERSION }}'
+      - name: Run ESLint
+        run: pnpm run lint
+      - name: Check Prettier formatting
+        run: 'pnpm run prettier:check'
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: ./.github/actions/setup-environment
+        with:
+          node-version: '${{ env.NODE_VERSION }}'
+          pnpm-version: '${{ env.PNPM_VERSION }}'
+      - run: pnpm run build
+      - run: pnpm run test
+    timeout-minutes: 15

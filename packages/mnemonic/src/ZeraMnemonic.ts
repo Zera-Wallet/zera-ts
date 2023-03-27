@@ -84,7 +84,7 @@ export class ZeraMnemonic {
      * @returns A Promise that resolves to a ZeraMnemonic instance.
      * @throws Will throw an error if the strength value is invalid.
      */
-    public static async generate(strength: number = 128, language: ZeraLanguage = "en"): Promise<ZeraMnemonic> {
+    public static async generate(strength = 128, language: ZeraLanguage = "en"): Promise<ZeraMnemonic> {
         if (strength % 32 !== 0 || strength < 128 || strength > 256) {
             throw new Error("Invalid strength value. It must be one of 128, 160, 192, 224, or 256.");
         }
@@ -130,7 +130,7 @@ export class ZeraMnemonic {
      * @param password An optional password to use when generating the seed. Default is an empty string.
      * @returns A Promise that resolves to a Uint8Array containing the seed.
      */
-    public async toSeed(password: string = ""): Promise<Uint8Array> {
+    public async toSeed(password = ""): Promise<Uint8Array> {
         const normalizedMnemonic = this.mnemonic.map((word) => normalize(word)).join(" ");
         const salt = "mnemonic" + normalize(password);
         return pbkdf2(sha256, normalizedMnemonic, salt, { c: 2048, dkLen: 64 });

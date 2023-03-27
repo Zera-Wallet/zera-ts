@@ -34,12 +34,10 @@ describe("ZeraStorageDetector", () => {
         delete (globalThis as any).window;
         const originalVersions = process.versions;
         Object.defineProperty(process, "versions", { writable: true });
-        // @ts-ignore
-        process.versions = { ...originalVersions, node: "16.0.0" };
+        (process as any).versions = { ...originalVersions, node: "16.0.0" };
         const storageType = await ZeraStorageDetector.detectOptimalStorageType();
         expect(storageType).toBe(ZeraStorageType.FILE_SYSTEM);
-        // @ts-ignore
-        process.versions = originalVersions;
+        (process as any).versions = originalVersions;
     });
 
     test("detectOptimalStorageType returns memory as fallback", async () => {

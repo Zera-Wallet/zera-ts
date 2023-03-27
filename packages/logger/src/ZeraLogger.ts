@@ -58,23 +58,23 @@ export class ZeraLogger {
         this.level = level;
     }
 
-    log(...args: any[]): void {
+    log(...args: unknown[]): void {
         this.logWithPrefix(ZeraLogLevel.DEBUG, ...args);
     }
 
-    debug(...args: any[]): void {
+    debug(...args: unknown[]): void {
         this.logWithPrefix(ZeraLogLevel.DEBUG, ...args);
     }
 
-    info(...args: any[]): void {
+    info(...args: unknown[]): void {
         this.logWithPrefix(ZeraLogLevel.INFO, ...args);
     }
 
-    warn(...args: any[]): void {
+    warn(...args: unknown[]): void {
         this.logWithPrefix(ZeraLogLevel.WARN, ...args);
     }
 
-    error(...args: any[]): void {
+    error(...args: unknown[]): void {
         this.logWithPrefix(ZeraLogLevel.ERROR, ...args);
     }
 
@@ -138,7 +138,7 @@ export class ZeraLogger {
         }
     }
 
-    private logWithPrefix(level: ZeraLogLevel, ...args: any[]): void {
+    private logWithPrefix(level: ZeraLogLevel, ...args: unknown[]): void {
         let prefix = "[zera]";
         const logArgs = [...args];
         if (typeof args[0] === "string" && args[0].startsWith("[zera")) {
@@ -154,7 +154,7 @@ export class ZeraLogger {
         }
     }
 
-    private formatMessage(level: Exclude<ZeraLogLevel, "none">, prefix: string, ...args: any[]): any[] {
+    private formatMessage(level: Exclude<ZeraLogLevel, "none">, prefix: string, ...args: unknown[]): unknown[] {
         const levelColor = levelColors[level];
         const levelLabel = levelColor(`${prefix} ${levelColor.bold(level.toUpperCase())}:`);
         return [levelLabel, ...args];
