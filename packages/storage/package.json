@@ -36,6 +36,8 @@
     },
     "scripts": {
         "build": "tsup --dts",
+        "prettier:check": "prettier --check {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
+        "prettier:fix": "prettier --write {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
         "test": "vitest run",
         "watch": "tsup --watch --dts"
     },

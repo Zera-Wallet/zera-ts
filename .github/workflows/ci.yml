@@ -1,42 +1,33 @@
 name: CI
 
-on:
-    push:
-        branches: ["main"]
-    pull_request:
-        types: [opened, synchronize]
+on: push
+
+env:
+    NODE_VERSION: 18.15.0
+    PNPM_VERSION: 7.27.1
 
 jobs:
-    build:
-        name: Build and Test
-        timeout-minutes: 15
-        runs-on: ubuntu-latest
-        # To use Remote Caching, uncomment the next lines and follow the steps below.
-        # env:
-        #  TURBO_TOKEN: ${{ secrets.TURBO_TOKEN }}
-        #  TURBO_TEAM: ${{ secrets.TURBO_TEAM }}
-
+    lint-and-format:
+        name: Lint and Format
+        runs-on: ubuntu-20.04
         steps:
-            - name: Check out code
-              uses: actions/checkout@v3
+            - uses: actions/checkout@v2
+            - uses: ./.github/actions/setup-environment
               with:
-                  fetch-depth: 2
+                  node-version: ${{ env.NODE_VERSION }}
+                  pnpm-version: ${{ env.PNPM_VERSION }}
+            - name: Check Prettier formatting
+              run: pnpm run prettier:check
 
-            - uses: pnpm/action-setup@v2.0.1
+    build-and-test:
+        name: Build and Test
+        runs-on: ubuntu-20.04
+        steps:
+            - uses: actions/checkout@v2
+            - uses: ./.github/actions/setup-environment
               with:
-                  version: 6.32.2
-
-            - name: Setup Node.js environment
-              uses: actions/setup-node@v3
-              with:
-                  node-version: 16
-                  cache: "pnpm"
-
-            - name: Install dependencies
-              run: pnpm install
-
-            - name: Build
-              run: pnpm build
-
-            - name: Test
-              run: pnpm test
+                  node-version: ${{ env.NODE_VERSION }}
+                  pnpm-version: ${{ env.PNPM_VERSION }}
+            - run: pnpm run build
+            - run: pnpm run test
+        timeout-minutes: 15
