@@ -1,0 +1,56 @@
+{
+    "name": "@zera-ts/code-summary",
+    "version": "0.0.1",
+    "description": "TODO",
+    "license": "Apache-2.0",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "publishConfig": {
+        "main": "dist/index.js",
+        "module": "dist/index.mjs",
+        "types": "dist/index.d.ts",
+        "exports": {
+            ".": {
+                "import": "./dist/index.mjs",
+                "require": "./dist/index.js",
+                "types": "./dist/index.d.ts"
+            }
+        }
+    },
+    "files": [
+        "dist",
+        "src"
+    ],
+    "dependencies": {
+        "@zera-ts/logger": "workspace:^0.0.1",
+        "@zera-ts/storage": "workspace:^0.0.1",
+        "commander": "10.0.0",
+        "glob": "^9.3.2",
+        "ignore": "^5.2.4",
+        "openai": "3.2.1"
+    },
+    "devDependencies": {
+        "tsup": "6.7.0"
+    },
+    "scripts": {
+        "build": "tsup --dts",
+        "prettier:check": "prettier --check {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
+        "prettier:fix": "prettier --write {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
+        "watch": "tsup --watch --dts"
+    },
+    "typedoc": {
+        "entryPoint": "./src/index.ts"
+    },
+    "bin": {
+        "code-summary": "./dist/cli/index.js"
+    }
+}

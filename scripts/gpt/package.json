@@ -1,0 +1,54 @@
+{
+    "name": "@zera-ts/gpt-cli",
+    "version": "0.0.1",
+    "description": "TODO",
+    "license": "Apache-2.0",
+    "main": "dist/index.js",
+    "module": "dist/index.mjs",
+    "types": "dist/index.d.ts",
+    "sideEffects": false,
+    "exports": {
+        ".": {
+            "import": "./dist/index.mjs",
+            "require": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "publishConfig": {
+        "main": "dist/index.js",
+        "module": "dist/index.mjs",
+        "types": "dist/index.d.ts",
+        "exports": {
+            ".": {
+                "import": "./dist/index.mjs",
+                "require": "./dist/index.js",
+                "types": "./dist/index.d.ts"
+            }
+        }
+    },
+    "files": [
+        "dist",
+        "src"
+    ],
+    "dependencies": {
+        "@zera-ts/logger": "workspace:^0.0.1",
+        "glob": "^9.3.2",
+        "globby": "^11.1.0",
+        "openai": "^3.2.1",
+        "yargs": "^17.7.1"
+    },
+    "devDependencies": {
+        "@types/yargs": "^17.0.23",
+        "tsup": "6.7.0"
+    },
+    "scripts": {
+        "build": "tsup --dts",
+        "prettier:check": "prettier --check {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
+        "prettier:fix": "prettier --write {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
+        "test": "vitest run",
+        "watch": "tsup --watch --dts"
+    },
+    "typedoc": {
+        "entryPoint": "./src/index.ts"
+    }
+}
