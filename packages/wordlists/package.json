@@ -5,13 +5,22 @@
     "license": "Apache-2.0",
     "main": "./dist/index.js",
     "module": "./dist/index.mjs",
-    "types": "./dist/index.d.ts",
     "sideEffects": false,
     "exports": {
         ".": {
             "import": "./dist/index.mjs",
             "require": "./dist/index.js",
             "types": "./dist/index.d.ts"
+        },
+        "./en": {
+            "import": "./dist/words/en.mjs",
+            "require": "./dist/words/en.js",
+            "types": "./dist/words/en.d.ts"
+        },
+        "./es": {
+            "import": "./dist/words/es.mjs",
+            "require": "./dist/words/es.js",
+            "types": "./dist/words/es.d.ts"
         }
     },
     "publishConfig": {
@@ -23,6 +32,16 @@
                 "import": "./dist/index.mjs",
                 "require": "./dist/index.js",
                 "types": "./dist/index.d.ts"
+            },
+            "./en": {
+                "import": "./dist/words/en.mjs",
+                "require": "./dist/words/en.js",
+                "types": "./dist/words/en.d.ts"
+            },
+            "./es": {
+                "import": "./dist/words/es.mjs",
+                "require": "./dist/words/es.js",
+                "types": "./dist/words/es.d.ts"
             }
         }
     },
