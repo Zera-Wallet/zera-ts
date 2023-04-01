@@ -1,7 +1,7 @@
 {
-    "name": "@zera-ts/logger",
+    "name": "@zera-ts/hd-wallet",
     "version": "0.0.1",
-    "description": "ZeraLogger is a versatile and customizable logging package for TypeScript applications. It provides various log levels, configurable outputs, and supports log context.",
+    "description": "A utility library for Zera. Includes functions for generating random bytes, converting between binary and byte array formats, and more.",
     "license": "Apache-2.0",
     "main": "dist/index.js",
     "module": "dist/index.mjs",
@@ -31,13 +31,14 @@
         "src"
     ],
     "dependencies": {
-        "chalk": "4.1.2"
+        "@zera-ts/mnemonic": "workspace:*"
     },
     "scripts": {
         "build": "tsup --dts",
         "prettier:check": "prettier --check {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
         "prettier:fix": "prettier --write {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
         "test": "vitest run",
+        "update": "ts-node ./scripts/update.ts && prettier --write ./src/types/index.ts",
         "watch": "tsup --watch --dts"
     },
     "typedoc": {
