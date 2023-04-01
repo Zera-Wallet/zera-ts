@@ -10,7 +10,7 @@ export async function getServerSideProps() {
     const wordlist = await ZeraWordlist.get("en");
     // console.log("Wordlist in getServerSideProps", wordlist);
 
-    const mnemonic = await ZeraMnemonic.generate();
+    const mnemonic = ZeraMnemonic.generate(128, wordlist);
     console.log("Mnemonic in getServerSideProps", mnemonic);
 
     const entropy = await mnemonic.toEntropy();
@@ -41,9 +41,9 @@ export async function getServerSideProps() {
     const perf = await zlogger.performance(
         async () => {
             for (let i = 0; i < 10; i++) {
-                const mnemonic = await ZeraMnemonic.generate();
+                const mnemonic = await ZeraMnemonic.generate(128);
 
-                const seed = await mnemonic.toSeed();
+                const seed = mnemonic.toSeed();
             }
         },
         {
@@ -57,7 +57,7 @@ export async function getServerSideProps() {
 }
 export default function Home() {
     async function init() {
-        const mnemonic = await ZeraMnemonic.generate();
+        const mnemonic = await ZeraMnemonic.generate(128);
         console.log("Mnemonic in browser", mnemonic);
 
         const store = await ZeraStorageFactory.create();
@@ -106,7 +106,7 @@ export default function Home() {
 }
 
 async function generateAndSaveMnemonic(store: ZeraStorage, key: string) {
-    const mnemonic = await ZeraMnemonic.generate();
+    const mnemonic = await ZeraMnemonic.generate(128);
     await store.setItem(key, mnemonic.toString());
     return mnemonic;
 }

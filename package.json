@@ -14,8 +14,7 @@
         "lint": "eslint ./packages --ext .ts,.tsx --cache",
         "test": "turbo run test --output-logs new-only",
         "prettier:check": "turbo run prettier:check --output-logs new-only",
-        "prettier:fix": "turbo run prettier:fix --output-logs new-only",
-        "gpt": "node ./scripts/gpt/dist/index.mjs"
+        "prettier:fix": "turbo run prettier:fix --output-logs new-only"
     },
     "devDependencies": {
         "@types/node": "^18.15.0",
