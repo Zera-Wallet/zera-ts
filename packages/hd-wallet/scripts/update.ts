@@ -1,5 +1,6 @@
 /// <reference lib="dom" />
 import fs from "fs";
+import { zlogger } from "@zera-ts/logger";
 
 type BIP44Coin = {
     type: number;
@@ -58,13 +59,13 @@ async function updateCoinTypes(): Promise<void> {
 
         fs.writeFile("./src/types/index.ts", newFileContent, (err) => {
             if (err) {
-                console.error("Error writing coins to file:", err);
+                zlogger.error("Error writing coins to file:");
             } else {
-                console.log("Coins written to file coins.ts");
+                zlogger.success("ZeraCoinType written to ./src/types/index.ts");
             }
         });
     } catch (error) {
-        console.error("Error updating coin types:", error);
+        zlogger.error("Error updating coin types:", error);
     }
 }
 

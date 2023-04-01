@@ -5,6 +5,7 @@ export const ZeraLogLevel = {
     INFO: "info",
     WARN: "warn",
     ERROR: "error",
+    SUCCESS: "success",
     NONE: "none",
 } as const;
 export type ZeraLogLevel = (typeof ZeraLogLevel)[keyof typeof ZeraLogLevel];
@@ -23,6 +24,7 @@ const levelColors = {
     [ZeraLogLevel.INFO]: chalk.cyanBright,
     [ZeraLogLevel.WARN]: chalk.yellowBright,
     [ZeraLogLevel.ERROR]: chalk.red,
+    [ZeraLogLevel.SUCCESS]: chalk.greenBright,
 };
 
 export interface ZeraPerformanceOptions {
@@ -78,8 +80,19 @@ export class ZeraLogger {
         this.logWithPrefix(ZeraLogLevel.ERROR, ...args);
     }
 
-    throw(error: Error): never {
-        this.logWithPrefix(ZeraLogLevel.ERROR, error);
+    success(...args: unknown[]): void {
+        this.logWithPrefix(ZeraLogLevel.SUCCESS, ...args);
+    }
+
+    throw(error: unknown): never {
+        const message = this.formatMessage(
+            ZeraLogLevel.ERROR,
+            "[zera]",
+            error instanceof Error ? error.message : error
+        ).join(" ");
+        if (error instanceof Error) {
+            error.message = message;
+        }
         throw error;
     }
 
@@ -149,8 +162,17 @@ export class ZeraLogger {
             return;
         }
 
-        if (level !== ZeraLogLevel.NONE && typeof console[level] === "function") {
+        if (level === ZeraLogLevel.NONE) {
+            return;
+        }
+
+        if (level === ZeraLogLevel.SUCCESS) {
+            console.log(...this.formatMessage(level, prefix, ...logArgs));
+            return;
+        }
+        if (typeof console[level] === "function") {
             console[level](...this.formatMessage(level, prefix, ...logArgs));
+            return;
         }
     }
 

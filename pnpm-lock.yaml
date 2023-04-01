@@ -42,8 +42,10 @@ importers:
 
   packages/hd-wallet:
     specifiers:
+      '@zera-ts/logger': workspace:*
       '@zera-ts/mnemonic': workspace:*
     dependencies:
+      '@zera-ts/logger': link:../logger
       '@zera-ts/mnemonic': link:../mnemonic
 
   packages/keyring:
