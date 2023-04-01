@@ -35,9 +35,6 @@
         "@zera-ts/bytes": "workspace:*",
         "@zera-ts/wordlists": "workspace:*"
     },
-    "devDependencies": {
-        "tsup": "6.7.0"
-    },
     "scripts": {
         "build": "tsup --dts",
         "prettier:check": "prettier --check {*,**/*}.{ts,tsx,js,jsx,json,md,css,yml,yaml} --ignore-unknown",
