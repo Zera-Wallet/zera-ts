@@ -1,0 +1,36 @@
+{
+    "folders": [
+        {
+            "name": "🌱 zera-ts",
+            "path": "."
+        },
+        {
+            "name": "🧬 @zera-ts/bytes",
+            "path": "packages/bytes"
+        },
+        {
+            "name": "🔑 @zera-ts/hd-wallet",
+            "path": "packages/hd-wallet"
+        },
+        {
+            "name": "🔒 @zera-ts/keyring",
+            "path": "packages/keyring"
+        },
+        {
+            "name": "📝 @zera-ts/logger",
+            "path": "packages/logger"
+        },
+        {
+            "name": "🔡 @zera-ts/mnemonic",
+            "path": "packages/mnemonic"
+        },
+        {
+            "name": "💾 @zera-ts/storage",
+            "path": "packages/storage"
+        },
+        {
+            "name": "📚 @zera-ts/wordlists",
+            "path": "packages/wordlists"
+        }
+    ]
+}
