@@ -1,5 +1,5 @@
 import { pbkdf2 } from "@noble/hashes/pbkdf2";
-import { sha256 } from "@noble/hashes/sha256";
+import { sha512 } from "@noble/hashes/sha512";
 import ZeraWordlist, { ZeraLanguage } from "@zera-ts/wordlists";
 
 import { normalize } from "./utils";
@@ -91,7 +91,7 @@ export class ZeraMnemonic {
         const generateMnemonic = (entropy: Uint8Array, wordlist: ZeraWordlist): ZeraMnemonic => {
             const words = wordlist.words;
             const entropyBits = bytesToBinary(entropy);
-            const fullChecksum = sha256(entropy);
+            const fullChecksum = sha512(entropy);
             const fullChecksumBits = bytesToBinary(fullChecksum);
             const checksumBits = fullChecksumBits.slice(0, (entropy.length * 8) / 32);
             const concatenatedBits = entropyBits + checksumBits;
@@ -175,7 +175,7 @@ export class ZeraMnemonic {
         const entropyBits = concatenatedBits.slice(0, -((concatenatedBits.length / 33) | 0));
         const entropy = binaryToBytes(entropyBits);
 
-        const fullChecksum = sha256(entropy);
+        const fullChecksum = sha512(entropy);
         const fullChecksumBits = bytesToBinary(fullChecksum);
         const checksumBits = fullChecksumBits.slice(0, (entropy.length * 8) / 32);
 
@@ -194,7 +194,7 @@ export class ZeraMnemonic {
     public toSeed(password = ""): Uint8Array {
         const normalizedMnemonic = this.mnemonic.map((word) => normalize(word)).join(" ");
         const salt = "mnemonic" + normalize(password);
-        return pbkdf2(sha256, normalizedMnemonic, salt, { c: 2048, dkLen: 64 });
+        return pbkdf2(sha512, normalizedMnemonic, salt, { c: 2048, dkLen: 64 });
     }
 
     /**
