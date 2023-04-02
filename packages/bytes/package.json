@@ -1,6 +1,6 @@
 {
     "name": "@zera-ts/bytes",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "A utility library for Zera. Includes functions for generating random bytes, converting between binary and byte array formats, and more.",
     "license": "Apache-2.0",
     "main": "dist/index.js",
