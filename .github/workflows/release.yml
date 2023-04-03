@@ -9,7 +9,7 @@ env:
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
   lint-and-format:
-    name: Create Release Pull Request
+    name: Create Pull Request
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
