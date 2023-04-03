@@ -1,6 +1,6 @@
 {
     "name": "@zera-ts/logger",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "ZeraLogger is a versatile and customizable logging package for TypeScript applications. It provides various log levels, configurable outputs, and supports log context.",
     "license": "Apache-2.0",
     "main": "dist/index.js",

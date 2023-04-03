@@ -1,6 +1,6 @@
 {
     "name": "@zera-ts/storage",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "TODO",
     "license": "Apache-2.0",
     "main": "dist/index.js",

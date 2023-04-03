@@ -1,6 +1,6 @@
 {
     "name": "@zera-ts/wordlists",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "A tree-shakable, BIP39 compliant wordlist library for Zera, providing support for multiple languages in a lightweight package.",
     "license": "Apache-2.0",
     "main": "./dist/index.js",
