@@ -10,6 +10,7 @@
     },
     "scripts": {
         "build": "turbo run build --output-logs new-only",
+        "ci:release": "pnpm build && changeset publish",
         "docs": "typedoc",
         "lint": "eslint ./packages --ext .ts,.tsx --cache",
         "test": "turbo run test --output-logs new-only",

@@ -1,6 +1,6 @@
 {
     "name": "@zera-ts/mnemonic",
-    "version": "0.0.1",
+    "version": "0.0.0",
     "description": "A user-friendly library for generating, validating, and manipulating BIP39 mnemonics in Zera, supporting multiple languages and entropies.",
     "license": "Apache-2.0",
     "main": "./dist/index.js",
