@@ -8,8 +8,8 @@ env:
   PNPM_VERSION: 7.27.1
 concurrency: ${{ github.workflow }}-${{ github.ref }}
 jobs:
-  lint-and-format:
-    name: Create Pull Request
+  create-pr-and-publish:
+    name: Create PR and publish
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '${{ env.NODE_VERSION }}'
           pnpm-version: '${{ env.PNPM_VERSION }}'
-      - name: Create Release Pull Request
+      - name: Create PR and publish
         uses: changesets/action@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
