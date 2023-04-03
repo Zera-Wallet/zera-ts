@@ -1,6 +1,6 @@
 {
     "name": "@zera-ts/hd-wallet",
-    "version": "0.0.0",
+    "version": "0.0.1",
     "description": "A utility library for Zera. Includes functions for generating random bytes, converting between binary and byte array formats, and more.",
     "license": "Apache-2.0",
     "main": "dist/index.js",
