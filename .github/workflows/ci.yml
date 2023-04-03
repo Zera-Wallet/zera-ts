@@ -4,9 +4,12 @@ on:
 env:
   NODE_VERSION: 18.15.0
   PNPM_VERSION: 7.27.1
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 jobs:
   lint-and-format:
-    name: Lint and Format
+    name: Lint and format
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -19,7 +22,7 @@ jobs:
       - name: Check Prettier formatting
         run: 'pnpm run prettier:check'
   build-and-test:
-    name: Build and Test
+    name: Build and test
     runs-on: ubuntu-20.04
     steps:
       - uses: actions/checkout@v3
@@ -30,3 +33,13 @@ jobs:
       - run: pnpm run build
       - run: pnpm run test
     timeout-minutes: 15
+  semantic-pull-request:
+    name: Semantic PR title
+    runs-on: ubuntu-20.04
+    needs: build-and-test
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Semantic Pull Request
+        uses: amannn/action-semantic-pull-request@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
