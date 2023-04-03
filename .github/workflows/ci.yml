@@ -35,9 +35,7 @@ jobs:
     timeout-minutes: 15
   semantic-pull-request:
     name: Semantic PR title
-    runs-on: ubuntu-20.04
-    needs: build-and-test
-    if: github.event_name == 'pull_request_target'
+    runs-on: ubuntu-20.04  
     steps:
       - name: Semantic Pull Request
         uses: amannn/action-semantic-pull-request@v4
