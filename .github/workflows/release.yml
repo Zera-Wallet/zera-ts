@@ -1,6 +1,8 @@
 name: RELEASE
 on:
-  push:    
+  push:
+    branches:
+      - main      
 env:
   NODE_VERSION: 18.15.0
   PNPM_VERSION: 7.27.1
