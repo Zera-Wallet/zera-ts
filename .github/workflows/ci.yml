@@ -33,11 +33,3 @@ jobs:
       - run: pnpm run build
       - run: pnpm run test
     timeout-minutes: 15
-  semantic-pull-request:
-    name: Semantic PR title
-    runs-on: ubuntu-20.04    
-    steps:      
-      - name: Semantic Pull Request
-        uses: amannn/action-semantic-pull-request@v5
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
