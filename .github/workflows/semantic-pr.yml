@@ -1,4 +1,4 @@
-name: "Lint PR"
+name: "SEMANTIC PR"
 on:
   pull_request_target:
     types:
